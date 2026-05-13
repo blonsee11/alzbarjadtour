@@ -27,23 +27,25 @@
             overflow-x: hidden;
         }
 
-        /* Navbar Ultra Modern */
+        /* Navbar Updated for Icon Visibility */
         .navbar {
             padding: 20px 0;
-            transition: all 0.4s;
-            background: transparent;
+            transition: all 0.4s ease-in-out;
+            background: rgba(10, 17, 24, 0.15); /* خلفية خفيفة جداً للوضوح عند البداية */
+            backdrop-filter: blur(8px); /* تأثير بلوري عصري */
         }
         .navbar.scrolled {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(15px);
             padding: 12px 0;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
         }
         .nav-link {
             font-weight: 600;
             color: var(--white) !important;
             margin: 0 15px;
             position: relative;
+            transition: 0.3s;
         }
         .navbar.scrolled .nav-link { color: var(--deep-navy) !important; }
         .nav-link::after {
@@ -55,6 +57,12 @@
             transition: 0.3s;
         }
         .nav-link:hover::after { width: 100%; }
+
+        /* Ensure Logo is visible */
+        #navLogo {
+            transition: all 0.4s ease;
+            filter: brightness(0) invert(1); /* جعل اللوجو أبيض في البداية */
+        }
 
         /* Hero Section - Immersive */
         .hero {
@@ -162,6 +170,7 @@
         
         @media (max-width: 768px) {
             .hero-content h1 { font-size: 2.5rem; }
+            .navbar { background: var(--deep-navy); } /* ضمان الوضوح في الجوال */
         }
     </style>
 </head>
@@ -171,7 +180,8 @@
 <nav class="navbar navbar-expand-lg fixed-top" id="mainNav">
     <div class="container">
         <a class="navbar-brand" href="#">
-            <img src="logo.png" alt="Zabarjad" style="height: 50px; filter: brightness(0) invert(1);" id="navLogo">
+            <!-- الأيقونة تظهر باللون الأبيض فوراً بفضل التنسيق أعلاه -->
+            <img src="logo.png" alt="Zabarjad" style="height: 50px;" id="navLogo">
         </a>
         <button class="navbar-toggler bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
@@ -255,7 +265,6 @@
             <p class="text-muted">نعتني بك في رحلتك الروحانية بأقصى درجات التفاني</p>
         </div>
         <div class="row g-4">
-            <!-- Cards (Repeat for 3) -->
             <div class="col-md-4" data-aos="fade-up">
                 <div class="luxury-card p-4 text-center">
                     <div class="mb-4 text-gold"><i class="fas fa-kaaba fa-3x" style="color: var(--primary-gold);"></i></div>
@@ -308,7 +317,6 @@
                     </div>
                 </div>
             </div>
-            <!-- Repeat for other cities -->
             <div class="col-md-4" data-aos="zoom-in" data-aos-delay="100">
                 <div class="luxury-card">
                     <div class="img-zoom-container">
@@ -442,16 +450,17 @@
     // Initialize AOS
     AOS.init({ duration: 1000, once: true });
 
-    // Navbar scroll effect
+    // Updated Navbar Scroll Effect
     window.addEventListener('scroll', function() {
         const nav = document.getElementById('mainNav');
         const logo = document.getElementById('navLogo');
-        if (window.scrollY > 50) {
+        
+        if (window.scrollY > 20) {
             nav.classList.add('scrolled');
-            logo.style.filter = 'none';
+            logo.style.filter = 'none'; // يعود للونه الأصلي عند النزول
         } else {
             nav.classList.remove('scrolled');
-            logo.style.filter = 'brightness(0) invert(1)';
+            logo.style.filter = 'brightness(0) invert(1)'; // يظل أبيض ناصع في البداية
         }
     });
 
