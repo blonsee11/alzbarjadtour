@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zabarjad Tour | الزبرجد للسفر والسياحة</title>
+    
+    <!-- Bootstrap 5 & Fonts -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;500;700;900&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+    <style>
+        :root { 
+            --primary-gold: #c5a059;
+            --deep-navy: #0a1118;
+            --soft-gold: #f4ece1;
+            --white: #ffffff;
+            --glass: rgba(255, 255, 255, 0.1);
+        }
+        
+        body { 
+            font-family: 'Cairo', sans-serif; 
+            background-color: #fcfcfc; 
+            color: var(--deep-navy);
+            overflow-x: hidden;
+        }
+
+        /* Navbar Ultra Modern */
+        .navbar {
+            padding: 20px 0;
+            transition: all 0.4s;
+            background: transparent;
+        }
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 12px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        .nav-link {
+            font-weight: 600;
+            color: var(--white) !important;
+            margin: 0 15px;
+            position: relative;
+        }
+        .navbar.scrolled .nav-link { color: var(--deep-navy) !important; }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px; right: 0;
+            width: 0; height: 2px;
+            background: var(--primary-gold);
+            transition: 0.3s;
+        }
+        .nav-link:hover::after { width: 100%; }
+
+        /* Hero Section - Immersive */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(10, 17, 24, 0.4), rgba(10, 17, 24, 0.7)), 
+                        url('https://images.unsplash.com/photo-1506929562872-bb421503ef21?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            clip-path: ellipse(150% 100% at 50% 0%);
+        }
+        .hero-content h1 {
+            font-size: 4.5rem;
+            font-weight: 900;
+            line-height: 1.2;
+            text-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        .hero-content span { color: var(--primary-gold); }
+
+        /* Search Box Floating */
+        .search-container {
+            background: var(--white);
+            padding: 35px;
+            border-radius: 25px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+            margin-top: -80px;
+            position: relative;
+            z-index: 10;
+        }
+        .search-field {
+            border: none;
+            border-left: 1px solid #eee;
+            padding: 10px 20px;
+        }
+        .btn-luxury {
+            background: var(--deep-navy);
+            color: var(--white);
+            padding: 15px 40px;
+            border-radius: 15px;
+            font-weight: 700;
+            transition: 0.4s;
+        }
+        .btn-luxury:hover {
+            background: var(--primary-gold);
+            transform: translateY(-3px);
+        }
+
+        /* Glassmorphism Cards */
+        .luxury-card {
+            background: var(--white);
+            border-radius: 24px;
+            border: 1px solid #f0f0f0;
+            transition: 0.5s cubic-bezier(0.2, 1, 0.3, 1);
+            overflow: hidden;
+        }
+        .luxury-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 40px 60px rgba(0,0,0,0.1);
+        }
+        .img-zoom-container { overflow: hidden; height: 280px; }
+        .luxury-card img {
+            width: 100%; height: 100%; object-fit: cover;
+            transition: 0.8s;
+        }
+        .luxury-card:hover img { transform: scale(1.1); }
+
+        /* Omrah Section Custom */
+        .omrah-badge {
+            background: var(--soft-gold);
+            color: var(--primary-gold);
+            padding: 8px 20px;
+            border-radius: 50px;
+            display: inline-block;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        /* Booking Section Form */
+        .booking-wrapper {
+            background: var(--deep-navy);
+            border-radius: 40px;
+            overflow: hidden;
+            color: var(--white);
+        }
+        .form-control-luxury {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: white;
+            border-radius: 12px;
+            padding: 12px;
+        }
+        .form-control-luxury:focus {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border-color: var(--primary-gold);
+            box-shadow: none;
+        }
+
+        /* Footer */
+        footer {
+            background: #05080b;
+            padding: 60px 0 30px;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-content h1 { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg fixed-top" id="mainNav">
+    <div class="container">
+        <a class="navbar-brand" href="#">
+            <img src="logo.png" alt="Zabarjad" style="height: 50px; filter: brightness(0) invert(1);" id="navLogo">
+        </a>
+        <button class="navbar-toggler bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto align-items-center">
+                <li class="nav-item"><a href="#" class="nav-link">الرئيسية</a></li>
+                <li class="nav-item"><a href="#popular" class="nav-link">الوجهات</a></li>
+                <li class="nav-item"><a href="#umrah" class="nav-link">خدمات العمرة</a></li>
+                <li class="nav-item"><a href="#about" class="nav-link">من نحن</a></li>
+                <li class="nav-item ms-lg-3">
+                    <a href="#booking-target" class="btn btn-luxury" style="background: var(--primary-gold);">احجز رحلتك</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero text-white">
+    <div class="container text-center">
+        <div class="hero-content" data-aos="fade-up">
+            <h1 class="mb-4">اكتشف روعة العالم <br>مع <span>الزبرجد تور</span></h1>
+            <p class="lead mb-5 opacity-75">نحن لا نصنع رحلات فقط، نحن نصنع ذكريات تدوم للأبد</p>
+        </div>
+    </div>
+</section>
+
+<!-- Search Section -->
+<div class="container" data-aos="fade-up" data-aos-delay="200">
+    <div class="search-container">
+        <div class="row g-3 align-items-center">
+            <div class="col-md-4">
+                <div class="search-field">
+                    <label class="d-block small text-muted mb-1">وجهة السفر</label>
+                    <input type="text" class="form-control border-0 p-0 fw-bold" placeholder="إلى أين تريد الذهاب؟">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="search-field">
+                    <label class="d-block small text-muted mb-1">نوع الرحلة</label>
+                    <select class="form-select border-0 p-0 fw-bold shadow-none">
+                        <option>سياحة خارجية</option>
+                        <option>عمرة</option>
+                        <option>رحلات عمل</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="search-field">
+                    <label class="d-block small text-muted mb-1">تاريخ السفر</label>
+                    <input type="date" class="form-control border-0 p-0 fw-bold">
+                </div>
+            </div>
+            <div class="col-md-2">
+                <button class="btn btn-luxury w-100">بحث</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Services Bar -->
+<div class="py-5 mt-5">
+    <div class="container">
+        <div class="row justify-content-center g-4 text-center">
+            <div class="col-md-2 col-6" data-aos="zoom-in"><i class="fas fa-hotel fa-2x mb-3 text-muted"></i><h6 class="fw-bold">فنادق</h6></div>
+            <div class="col-md-2 col-6" data-aos="zoom-in" data-aos-delay="100"><i class="fas fa-plane fa-2x mb-3 text-muted"></i><h6 class="fw-bold">طيران</h6></div>
+            <div class="col-md-2 col-6" data-aos="zoom-in" data-aos-delay="200"><i class="fas fa-bus fa-2x mb-3 text-muted"></i><h6 class="fw-bold">نقل</h6></div>
+            <div class="col-md-2 col-6" data-aos="zoom-in" data-aos-delay="300"><i class="fas fa-passport fa-2x mb-3 text-muted"></i><h6 class="fw-bold">تأشيرات</h6></div>
+            <div class="col-md-2 col-6" data-aos="zoom-in" data-aos-delay="400"><i class="fas fa-kaaba fa-2x mb-3 text-muted"></i><h6 class="fw-bold">عمرة</h6></div>
+        </div>
+    </div>
+</div>
+
+<!-- Omrah Section -->
+<section class="py-5" id="umrah" style="background: #f8f9fa;">
+    <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <span class="omrah-badge">خدمات إيمانية</span>
+            <h2 class="fw-900 display-5">رحلات العمرة</h2>
+            <p class="text-muted">نعتني بك في رحلتك الروحانية بأقصى درجات التفاني</p>
+        </div>
+        <div class="row g-4">
+            <!-- Cards (Repeat for 3) -->
+            <div class="col-md-4" data-aos="fade-up">
+                <div class="luxury-card p-4 text-center">
+                    <div class="mb-4 text-gold"><i class="fas fa-kaaba fa-3x" style="color: var(--primary-gold);"></i></div>
+                    <h4 class="fw-bold mb-3">تأشيرات العمرة</h4>
+                    <p class="text-muted small">إصدار تأشيرات العمرة الإلكترونية والزيارة بسرعة واحترافية عالية.</p>
+                </div>
+            </div>
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="luxury-card p-4 text-center">
+                    <div class="mb-4 text-gold"><i class="fas fa-hotel fa-3x" style="color: var(--primary-gold);"></i></div>
+                    <h4 class="fw-bold mb-3">فنادق مكة والمدينة</h4>
+                    <p class="text-muted small">حجوزات في أقرب الفنادق للحرمين الشريفين بأسعار تفضيلية.</p>
+                </div>
+            </div>
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="luxury-card p-4 text-center">
+                    <div class="mb-4 text-gold"><i class="fas fa-shuttle-van fa-3x" style="color: var(--primary-gold);"></i></div>
+                    <h4 class="fw-bold mb-3">النقل والمواصلات</h4>
+                    <p class="text-muted small">أسطول من الحافلات والسيارات الحديثة لراحتكم أثناء التنقل.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Popular Destinations -->
+<section class="py-5" id="popular">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-end mb-5" data-aos="fade-right">
+            <div>
+                <h2 class="fw-900 display-6">وجهاتنا الشائعة</h2>
+                <p class="text-muted mb-0">أماكن تم اختيارها بعناية من شركة الزبرجد</p>
+            </div>
+            <div class="d-none d-md-block">
+                <a href="#" class="text-decoration-none fw-bold" style="color: var(--primary-gold);">شاهد الكل <i class="fas fa-arrow-left ms-2"></i></a>
+            </div>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-4" data-aos="zoom-in">
+                <div class="luxury-card">
+                    <div class="img-zoom-container">
+                        <img src="alaxandaria.jpg" alt="Alex">
+                    </div>
+                    <div class="p-4">
+                        <div class="d-flex justify-content-between">
+                            <h5 class="fw-bold">الإسكندرية</h5>
+                            <span class="text-warning"><i class="fas fa-star"></i> 4.8</span>
+                        </div>
+                        <p class="text-muted small"><i class="fas fa-map-marker-alt me-1"></i> مصر</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Repeat for other cities -->
+            <div class="col-md-4" data-aos="zoom-in" data-aos-delay="100">
+                <div class="luxury-card">
+                    <div class="img-zoom-container">
+                        <img src="Cairo.jpg" alt="Cairo">
+                    </div>
+                    <div class="p-4">
+                        <div class="d-flex justify-content-between">
+                            <h5 class="fw-bold">القاهرة</h5>
+                            <span class="text-warning"><i class="fas fa-star"></i> 4.9</span>
+                        </div>
+                        <p class="text-muted small"><i class="fas fa-map-marker-alt me-1"></i> مصر</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4" data-aos="zoom-in" data-aos-delay="200">
+                <div class="luxury-card">
+                    <div class="img-zoom-container">
+                        <img src="sidabosaid.jpg" alt="Tunis">
+                    </div>
+                    <div class="p-4">
+                        <div class="d-flex justify-content-between">
+                            <h5 class="fw-bold">سيدي بو سعيد</h5>
+                            <span class="text-warning"><i class="fas fa-star"></i> 4.7</span>
+                        </div>
+                        <p class="text-muted small"><i class="fas fa-map-marker-alt me-1"></i> تونس</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- About Section Modern -->
+<section class="py-5 overflow-hidden" id="about">
+    <div class="container">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-6" data-aos="fade-left">
+                <h6 class="text-uppercase fw-bold" style="color: var(--primary-gold); letter-spacing: 2px;">لماذا الزبرجد تور؟</h6>
+                <h2 class="display-5 fw-900 mb-4">أكثر من 7 سنوات من <br>التميز في خدمات السفر</h2>
+                <p class="text-muted mb-4 lead">شركة الزبرجد تور للخدمات السياحية هي شريككم الموثوق في ليبيا، نقدم حلولاً متكاملة تضمن لكم الراحة والأمان في كل وجهة تقصدونها.</p>
+                <div class="row g-4">
+                    <div class="col-6">
+                        <h3 class="fw-bold mb-0">1.5K+</h3>
+                        <p class="small text-muted">رحلة دولية</p>
+                    </div>
+                    <div class="col-6">
+                        <h3 class="fw-bold mb-0">800+</h3>
+                        <p class="small text-muted">عميل سعيد</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6" data-aos="fade-right">
+                <div class="position-relative">
+                    <img src="flight01.jpg" class="img-fluid rounded-5 shadow-lg" alt="Travel">
+                    <div class="position-absolute top-50 start-0 translate-middle d-none d-lg-block">
+                        <div class="bg-white p-4 rounded-4 shadow-lg text-center" style="width: 150px;">
+                            <h2 class="text-danger fw-900">20%</h2>
+                            <p class="mb-0 small fw-bold">خصم للحجز المبكر</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Booking Modernized -->
+<section class="py-5" id="booking-target">
+    <div class="container" data-aos="zoom-out">
+        <div class="booking-wrapper shadow-2xl">
+            <div class="row g-0">
+                <div class="col-lg-5 p-5 d-flex flex-column justify-content-center" style="background: linear-gradient(45deg, #0a1118, #1a2a3a);">
+                    <h2 class="display-6 fw-bold mb-4">ابدأ رحلتك الآن</h2>
+                    <p class="opacity-75 mb-5">املأ البيانات وسيتواصل معك خبراء السفر لدينا خلال أقل من ساعة لتأكيد التفاصيل.</p>
+                    <div class="d-flex align-items-center mb-4">
+                        <div class="me-3 fs-2 text-gold"><i class="fab fa-whatsapp"></i></div>
+                        <div>
+                            <h6 class="mb-0 fw-bold">دعم مباشر 24/7</h6>
+                            <p class="small opacity-50 mb-0">تواصل معنا عبر واتساب</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-7 p-5 bg-white text-dark">
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <label class="small fw-bold mb-2">الاسم بالكامل</label>
+                            <input type="text" id="userName" class="form-control form-control-lg bg-light border-0" placeholder="محمد أحمد">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="small fw-bold mb-2">رقم الهاتف</label>
+                            <input type="text" id="userPhone" class="form-control form-control-lg bg-light border-0" placeholder="09xxxxxxx">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="small fw-bold mb-2">الوجهة المقصودة</label>
+                            <input type="text" id="userDest" class="form-control form-control-lg bg-light border-0" placeholder="إسطنبول، القاهرة...">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="small fw-bold mb-2">تاريخ السفر</label>
+                            <input type="date" id="travelDate" class="form-control form-control-lg bg-light border-0">
+                        </div>
+                        <div class="col-12">
+                            <button onclick="sendToWhatsApp()" class="btn btn-luxury w-100 py-3 fs-5">
+                                <i class="fab fa-whatsapp me-2"></i> إرسال الطلب عبر واتساب
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="text-white">
+    <div class="container text-center">
+        <img src="logo.png" alt="Zabarjad" style="height: 40px; margin-bottom: 30px; filter: brightness(0) invert(1);">
+        <div class="mb-4">
+            <a href="#" class="text-white mx-2 fs-4 opacity-50 hover-opacity-100"><i class="fab fa-facebook"></i></a>
+            <a href="#" class="text-white mx-2 fs-4 opacity-50 hover-opacity-100"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="text-white mx-2 fs-4 opacity-50 hover-opacity-100"><i class="fab fa-twitter"></i></a>
+        </div>
+        <hr class="opacity-10">
+        <p class="small opacity-50">جميع الحقوق محفوظة &copy; 2026 شركة الزبرجد للسفر والسياحة</p>
+    </div>
+</footer>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+    // Initialize AOS
+    AOS.init({ duration: 1000, once: true });
+
+    // Navbar scroll effect
+    window.addEventListener('scroll', function() {
+        const nav = document.getElementById('mainNav');
+        const logo = document.getElementById('navLogo');
+        if (window.scrollY > 50) {
+            nav.classList.add('scrolled');
+            logo.style.filter = 'none';
+        } else {
+            nav.classList.remove('scrolled');
+            logo.style.filter = 'brightness(0) invert(1)';
+        }
+    });
+
+    function sendToWhatsApp() {
+        const myNumber = "218912181349";
+        const name = document.getElementById('userName').value;
+        const phone = document.getElementById('userPhone').value;
+        const dest = document.getElementById('userDest').value;
+        const date = document.getElementById('travelDate').value;
+
+        if(!name || !phone || !dest) {
+            alert("يرجى إكمال البيانات الأساسية");
+            return;
+        }
+
+        const message = `*طلب حجز VIP من الموقع*%0A%0A` +
+                        `👤 *العميل:* ${name}%0A` +
+                        `📞 *الهاتف:* ${phone}%0A` +
+                        `🌍 *الوجهة:* ${dest}%0A` +
+                        `📅 *التاريخ:* ${date}`;
+        
+        window.open(`https://wa.me/${myNumber}?text=${message}`, '_blank');
+    }
+</script>
+</body>
+</html>
