@@ -81,7 +81,11 @@
             line-height: 1.2;
             text-shadow: 0 10px 20px rgba(0,0,0,0.2);
         }
-        .hero-content span { color: var(--primary-gold); }
+        
+        /* التعديل المطلوب: لون أخضر فاتح للنص في الواجهة فقط */
+        .hero-green-text {
+            color: #2ecc71 !important;
+        }
 
         /* Search Box Floating */
         .search-container {
@@ -204,7 +208,7 @@
 <section class="hero text-white">
     <div class="container text-center">
         <div class="hero-content" data-aos="fade-up">
-            <h1 class="mb-4">اكتشف روعة العالم <br>مع <span>الزبرجد للخدمات السياحية</span></h1>
+            <h1 class="mb-4">اكتشف روعة العالم <br>مع <span class="hero-green-text">الزبرجد للخدمات السياحية</span></h1>
             <p class="lead mb-5 opacity-75">نحن لا نصنع رحلات فقط، نحن نصنع ذكريات تدوم للأبد</p>
         </div>
     </div>
