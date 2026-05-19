@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl" id="htmlPage">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zabarjad Tour | الزبرجد للسفر والسياحة</title>
     
     <!-- Bootstrap 5 & Fonts -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" rel="stylesheet" id="bootstrapStyles">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;500;700;900&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
@@ -31,8 +31,8 @@
         .navbar {
             padding: 20px 0;
             transition: all 0.4s ease-in-out;
-            background: rgba(10, 17, 24, 0.15); /* خلفية خفيفة جداً للوضوح عند البداية */
-            backdrop-filter: blur(8px); /* تأثير بلوري عصري */
+            background: rgba(10, 17, 24, 0.15);
+            backdrop-filter: blur(8px);
         }
         .navbar.scrolled {
             background: rgba(255, 255, 255, 0.98);
@@ -48,23 +48,29 @@
             transition: 0.3s;
         }
         .navbar.scrolled .nav-link { color: var(--deep-navy) !important; }
+        
+        /* تكييف خطوط التأثير السفلي حسب اتجاه اللغة */
+        html[dir="rtl"] .nav-link::after { right: 0; left: auto; }
+        html[dir="ltr"] .nav-link::after { left: 0; right: auto; }
+        
         .nav-link::after {
             content: '';
             position: absolute;
-            bottom: -5px; right: 0;
+            bottom: -5px;
             width: 0; height: 2px;
             background: var(--primary-gold);
             transition: 0.3s;
         }
         .nav-link:hover::after { width: 100%; }
 
-        /* Ensure Logo is visible */
+        /* تكبير اللوجو حسب طلبك */
         #navLogo {
             transition: all 0.4s ease;
-            filter: brightness(0) invert(1); /* جعل اللوجو أبيض في البداية */
+            filter: brightness(0) invert(1);
+            height: 65px !important; /* تعديل حجم الشعار */
         }
 
-        /* Hero Section - Immersive */
+        /* Hero Section */
         .hero {
             height: 100vh;
             background: linear-gradient(rgba(10, 17, 24, 0.4), rgba(10, 17, 24, 0.7)), 
@@ -82,7 +88,6 @@
             text-shadow: 0 10px 20px rgba(0,0,0,0.2);
         }
         
-        /* التعديل المطلوب: لون أخضر فاتح للنص في الواجهة فقط */
         .hero-green-text {
             color: #2ecc71 !important;
         }
@@ -99,9 +104,15 @@
         }
         .search-field {
             border: none;
-            border-left: 1px solid #eee;
             padding: 10px 20px;
         }
+        html[dir="rtl"] .search-field { border-left: 1px solid #eee; }
+        html[dir="ltr"] .search-field { border-right: 1px solid #eee; }
+        
+        @media (max-width: 767px) {
+            .search-field { border: none !important; }
+        }
+
         .btn-luxury {
             background: var(--deep-navy);
             color: var(--white);
@@ -113,9 +124,30 @@
         .btn-luxury:hover {
             background: var(--primary-gold);
             transform: translateY(-3px);
+            color: var(--white);
         }
 
-        /* Glassmorphism Cards */
+        /* Lang Button Modern Style */
+        .btn-lang {
+            border: 1px solid rgba(255,255,255,0.4);
+            color: var(--white);
+            background: transparent;
+            padding: 6px 15px;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+        .navbar.scrolled .btn-lang {
+            color: var(--deep-navy);
+            border-color: rgba(10, 17, 24, 0.2);
+        }
+        .btn-lang:hover {
+            background: var(--primary-gold);
+            border-color: var(--primary-gold);
+            color: white !important;
+        }
+
+        /* Luxury Cards */
         .luxury-card {
             background: var(--white);
             border-radius: 24px;
@@ -134,7 +166,7 @@
         }
         .luxury-card:hover img { transform: scale(1.1); }
 
-        /* Omrah Section Custom */
+        /* Omrah Section */
         .omrah-badge {
             background: var(--soft-gold);
             color: var(--primary-gold);
@@ -152,19 +184,6 @@
             overflow: hidden;
             color: var(--white);
         }
-        .form-control-luxury {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
-            color: white;
-            border-radius: 12px;
-            padding: 12px;
-        }
-        .form-control-luxury:focus {
-            background: rgba(255,255,255,0.1);
-            color: white;
-            border-color: var(--primary-gold);
-            box-shadow: none;
-        }
 
         /* Footer */
         footer {
@@ -174,7 +193,9 @@
         
         @media (max-width: 768px) {
             .hero-content h1 { font-size: 2.5rem; }
-            .navbar { background: var(--deep-navy); } /* ضمان الوضوح في الجوال */
+            .navbar { background: var(--deep-navy); }
+            .nav-link { margin: 10px 0; }
+            .btn-lang { margin-top: 10px; }
         }
     </style>
 </head>
@@ -184,20 +205,24 @@
 <nav class="navbar navbar-expand-lg fixed-top" id="mainNav">
     <div class="container">
         <a class="navbar-brand" href="#">
-            <!-- الأيقونة تظهر باللون الأبيض فوراً بفضل التنسيق أعلاه -->
-            <img src="logo.png" alt="Zabarjad" style="height: 50px;" id="navLogo">
+            <img src="logo.png" alt="Zabarjad" id="navLogo">
         </a>
         <button class="navbar-toggler bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto align-items-center">
-                <li class="nav-item"><a href="#" class="nav-link">الرئيسية</a></li>
-                <li class="nav-item"><a href="#popular" class="nav-link">الوجهات</a></li>
-                <li class="nav-item"><a href="#umrah" class="nav-link">خدمات العمرة</a></li>
-                <li class="nav-item"><a href="#about" class="nav-link">من نحن</a></li>
-                <li class="nav-item ms-lg-3">
-                    <a href="#booking-target" class="btn btn-luxury" style="background: var(--primary-gold);">احجز رحلتك</a>
+            <!-- التبديل التلقائي لـ ms-auto و me-auto يعتمد على الكود البرمجي للغة -->
+            <ul class="navbar-nav ms-auto align-items-center" id="navLinks">
+                <li class="nav-item"><a href="#" class="nav-link" id="lnk-home">الرئيسية</a></li>
+                <li class="nav-item"><a href="#popular" class="nav-link" id="lnk-dest">الوجهات</a></li>
+                <li class="nav-item"><a href="#umrah" class="nav-link" id="lnk-umrah">خدمات العمرة</a></li>
+                <li class="nav-item"><a href="#about" class="nav-link" id="lnk-about">من نحن</a></li>
+                <li class="nav-item ms-lg-3 me-lg-2">
+                    <a href="#booking-target" class="btn btn-luxury" style="background: var(--primary-gold);" id="btn-book-nav">احجز رحلتك</a>
+                </li>
+                <!-- زر تغيير اللغة -->
+                <li class="nav-item">
+                    <button class="btn btn-lang" onclick="toggleLanguage()" id="langSwitcher">English</button>
                 </li>
             </ul>
         </div>
@@ -208,8 +233,8 @@
 <section class="hero text-white">
     <div class="container text-center">
         <div class="hero-content" data-aos="fade-up">
-            <h1 class="mb-4">اكتشف روعة العالم <br>مع <span class="hero-green-text">الزبرجد للخدمات السياحية</span></h1>
-            <p class="lead mb-5 opacity-75">نحن لا نصنع رحلات فقط، نحن نصنع ذكريات تدوم للأبد</p>
+            <h1 class="mb-4" id="hero-title">اكتشف روعة العالم <br>مع <span class="hero-green-text">الزبرجد للخدمات السياحية</span></h1>
+            <p class="lead mb-5 opacity-75" id="hero-desc">نحن لا نصنع رحلات فقط، نحن نصنع ذكريات تدوم للأبد</p>
         </div>
     </div>
 </section>
@@ -220,28 +245,28 @@
         <div class="row g-3 align-items-center">
             <div class="col-md-4">
                 <div class="search-field">
-                    <label class="d-block small text-muted mb-1">وجهة السفر</label>
-                    <input type="text" class="form-control border-0 p-0 fw-bold" placeholder="إلى أين تريد الذهاب؟">
+                    <label class="d-block small text-muted mb-1" id="lbl-dest">وجهة السفر</label>
+                    <input type="text" id="p-dest" class="form-control border-0 p-0 fw-bold" placeholder="إلى أين تريد الذهاب؟">
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="search-field">
-                    <label class="d-block small text-muted mb-1">نوع الرحلة</label>
-                    <select class="form-select border-0 p-0 fw-bold shadow-none">
-                        <option>سياحة خارجية</option>
-                        <option>عمرة</option>
-                        <option>رحلات عمل</option>
+                    <label class="d-block small text-muted mb-1" id="lbl-type">نوع الرحلة</label>
+                    <select class="form-select border-0 p-0 fw-bold shadow-none" id="search-type">
+                        <option id="opt-out">سياحة خارجية</option>
+                        <option id="opt-umrah">عمرة</option>
+                        <option id="opt-bus">رحلات عمل</option>
                     </select>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="search-field">
-                    <label class="d-block small text-muted mb-1">تاريخ السفر</label>
+                    <label class="d-block small text-muted mb-1" id="lbl-date">تاريخ السفر</label>
                     <input type="date" class="form-control border-0 p-0 fw-bold">
                 </div>
             </div>
             <div class="col-md-2">
-                <button class="btn btn-luxury w-100">بحث</button>
+                <button class="btn btn-luxury w-100" id="btn-search">بحث</button>
             </div>
         </div>
     </div>
@@ -251,11 +276,11 @@
 <div class="py-5 mt-5">
     <div class="container">
         <div class="row justify-content-center g-4 text-center">
-            <div class="col-md-2 col-6" data-aos="zoom-in"><i class="fas fa-hotel fa-2x mb-3 text-muted"></i><h6 class="fw-bold">فنادق</h6></div>
-            <div class="col-md-2 col-6" data-aos="zoom-in" data-aos-delay="100"><i class="fas fa-plane fa-2x mb-3 text-muted"></i><h6 class="fw-bold">طيران</h6></div>
-            <div class="col-md-2 col-6" data-aos="zoom-in" data-aos-delay="200"><i class="fas fa-bus fa-2x mb-3 text-muted"></i><h6 class="fw-bold">نقل</h6></div>
-            <div class="col-md-2 col-6" data-aos="zoom-in" data-aos-delay="300"><i class="fas fa-passport fa-2x mb-3 text-muted"></i><h6 class="fw-bold">تأشيرات</h6></div>
-            <div class="col-md-2 col-6" data-aos="zoom-in" data-aos-delay="400"><i class="fas fa-kaaba fa-2x mb-3 text-muted"></i><h6 class="fw-bold">عمرة</h6></div>
+            <div class="col-md-2 col-6" data-aos="zoom-in"><i class="fas fa-hotel fa-2x mb-3 text-muted"></i><h6 class="fw-bold" id="srv-hotels">فنادق</h6></div>
+            <div class="col-md-2 col-6" data-aos="zoom-in" data-aos-delay="100"><i class="fas fa-plane fa-2x mb-3 text-muted"></i><h6 class="fw-bold" id="srv-flights">طيران</h6></div>
+            <div class="col-md-2 col-6" data-aos="zoom-in" data-aos-delay="200"><i class="fas fa-bus fa-2x mb-3 text-muted"></i><h6 class="fw-bold" id="srv-trans">نقل</h6></div>
+            <div class="col-md-2 col-6" data-aos="zoom-in" data-aos-delay="300"><i class="fas fa-passport fa-2x mb-3 text-muted"></i><h6 class="fw-bold" id="srv-visas">تأشيرات</h6></div>
+            <div class="col-md-2 col-6" data-aos="zoom-in" data-aos-delay="400"><i class="fas fa-kaaba fa-2x mb-3 text-muted"></i><h6 class="fw-bold" id="srv-umrah">عمرة</h6></div>
         </div>
     </div>
 </div>
@@ -264,30 +289,30 @@
 <section class="py-5" id="umrah" style="background: #f8f9fa;">
     <div class="container">
         <div class="text-center mb-5" data-aos="fade-up">
-            <span class="omrah-badge">خدمات إيمانية</span>
-            <h2 class="fw-900 display-5">رحلات العمرة</h2>
-            <p class="text-muted">نعتني بك في رحلتك الروحانية بأقصى درجات التفاني</p>
+            <span class="omrah-badge" id="u-badge">خدمات إيمانية</span>
+            <h2 class="fw-900 display-5" id="u-title">رحلات العمرة</h2>
+            <p class="text-muted" id="u-desc">نعتني بك في رحلتك الروحانية بأقصى درجات التفاني</p>
         </div>
         <div class="row g-4">
             <div class="col-md-4" data-aos="fade-up">
                 <div class="luxury-card p-4 text-center">
                     <div class="mb-4 text-gold"><i class="fas fa-kaaba fa-3x" style="color: var(--primary-gold);"></i></div>
-                    <h4 class="fw-bold mb-3">تأشيرات العمرة</h4>
-                    <p class="text-muted small">إصدار تأشيرات العمرة الإلكترونية والزيارة بسرعة واحترافية عالية.</p>
+                    <h4 class="fw-bold mb-3" id="u-card1-t">تأشيرات العمرة</h4>
+                    <p class="text-muted small" id="u-card1-d">إصدار تأشيرات العمرة الإلكترونية والزيارة بسرعة واحترافية عالية.</p>
                 </div>
             </div>
             <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
                 <div class="luxury-card p-4 text-center">
                     <div class="mb-4 text-gold"><i class="fas fa-hotel fa-3x" style="color: var(--primary-gold);"></i></div>
-                    <h4 class="fw-bold mb-3">فنادق مكة والمدينة</h4>
-                    <p class="text-muted small">حجوزات في أقرب الفنادق للحرمين الشريفين بأسعار تفضيلية.</p>
+                    <h4 class="fw-bold mb-3" id="u-card2-t">فنادق مكة والمدينة</h4>
+                    <p class="text-muted small" id="u-card2-d">حجوزات في أقرب الفنادق للحرمين الشريفين بأسعار تفضيلية.</p>
                 </div>
             </div>
             <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
                 <div class="luxury-card p-4 text-center">
                     <div class="mb-4 text-gold"><i class="fas fa-shuttle-van fa-3x" style="color: var(--primary-gold);"></i></div>
-                    <h4 class="fw-bold mb-3">النقل والمواصلات</h4>
-                    <p class="text-muted small">أسطول من الحافلات والسيارات الحديثة لراحتكم أثناء التنقل.</p>
+                    <h4 class="fw-bold mb-3" id="u-card3-t">النقل والمواصلات</h4>
+                    <p class="text-muted small" id="u-card3-d">أسطول من الحافلات والسيارات الحديثة لراحتكم أثناء التنقل.</p>
                 </div>
             </div>
         </div>
@@ -297,13 +322,13 @@
 <!-- Popular Destinations -->
 <section class="py-5" id="popular">
     <div class="container">
-        <div class="d-flex justify-content-between align-items-end mb-5" data-aos="fade-right">
+        <div class="d-flex justify-content-between align-items-end mb-5" id="dest-header" data-aos="fade-right">
             <div>
-                <h2 class="fw-900 display-6">وجهاتنا الشائعة</h2>
-                <p class="text-muted mb-0">أماكن تم اختيارها بعناية من شركة الزبرجد</p>
+                <h2 class="fw-900 display-6" id="dest-title">وجهاتنا الشائعة</h2>
+                <p class="text-muted mb-0" id="dest-subtitle">أماكن تم اختيارها بعناية من شركة الزبرجد</p>
             </div>
             <div class="d-none d-md-block">
-                <a href="#" class="text-decoration-none fw-bold" style="color: var(--primary-gold);">شاهد الكل <i class="fas fa-arrow-left ms-2"></i></a>
+                <a href="#" class="text-decoration-none fw-bold" style="color: var(--primary-gold);" id="dest-all">شاهد الكل <i class="fas fa-arrow-left ms-2" id="dest-arrow"></i></a>
             </div>
         </div>
         <div class="row g-4">
@@ -314,10 +339,10 @@
                     </div>
                     <div class="p-4">
                         <div class="d-flex justify-content-between">
-                            <h5 class="fw-bold">الإسكندرية</h5>
+                            <h5 class="fw-bold" id="card-city1">الإسكندرية</h5>
                             <span class="text-warning"><i class="fas fa-star"></i> 4.8</span>
                         </div>
-                        <p class="text-muted small"><i class="fas fa-map-marker-alt me-1"></i> مصر</p>
+                        <p class="text-muted small"><i class="fas fa-map-marker-alt me-1"></i> <span id="card-country1">مصر</span></p>
                     </div>
                 </div>
             </div>
@@ -328,10 +353,10 @@
                     </div>
                     <div class="p-4">
                         <div class="d-flex justify-content-between">
-                            <h5 class="fw-bold">القاهرة</h5>
+                            <h5 class="fw-bold" id="card-city2">القاهرة</h5>
                             <span class="text-warning"><i class="fas fa-star"></i> 4.9</span>
                         </div>
-                        <p class="text-muted small"><i class="fas fa-map-marker-alt me-1"></i> مصر</p>
+                        <p class="text-muted small"><i class="fas fa-map-marker-alt me-1"></i> <span id="card-country2">مصر</span></p>
                     </div>
                 </div>
             </div>
@@ -342,10 +367,10 @@
                     </div>
                     <div class="p-4">
                         <div class="d-flex justify-content-between">
-                            <h5 class="fw-bold">سيدي بو سعيد</h5>
+                            <h5 class="fw-bold" id="card-city3">سيدي بو سعيد</h5>
                             <span class="text-warning"><i class="fas fa-star"></i> 4.7</span>
                         </div>
-                        <p class="text-muted small"><i class="fas fa-map-marker-alt me-1"></i> تونس</p>
+                        <p class="text-muted small"><i class="fas fa-map-marker-alt me-1"></i> <span id="card-country3">تونس</span></p>
                     </div>
                 </div>
             </div>
@@ -353,32 +378,32 @@
     </div>
 </section>
 
-<!-- About Section Modern -->
+<!-- About Section -->
 <section class="py-5 overflow-hidden" id="about">
     <div class="container">
         <div class="row align-items-center g-5">
-            <div class="col-lg-6" data-aos="fade-left">
-                <h6 class="text-uppercase fw-bold" style="color: var(--primary-gold); letter-spacing: 2px;">لماذا الزبرجد تور؟</h6>
-                <h2 class="display-5 fw-900 mb-4">أكثر من 30 سنة  <br>التميز في خدمات السفر</h2>
-                <p class="text-muted mb-4 lead">شركة الزبرجد للخدمات السياحية هي شريككم الموثوق في ليبيا، نقدم حلولاً متكاملة تضمن لكم الراحة والأمان في كل وجهة تقصدونها.</p>
+            <div class="col-lg-6" id="about-text-side" data-aos="fade-left">
+                <h6 class="text-uppercase fw-bold" style="color: var(--primary-gold); letter-spacing: 2px;" id="ab-badge">لماذا الزبرجد تور؟</h6>
+                <h2 class="display-5 fw-900 mb-4" id="ab-title">أكثر من 30 سنة  <br>التميز في خدمات السفر</h2>
+                <p class="text-muted mb-4 lead" id="ab-desc">شركة الزبرجد للخدمات السياحية هي شريككم الموثوق في ليبيا، نقدم حلولاً متكاملة تضمن لكم الراحة والأمان في كل وجهة تقصدونها.</p>
                 <div class="row g-4">
                     <div class="col-6">
                         <h3 class="fw-bold mb-0">1.5K+</h3>
-                        <p class="small text-muted">رحلة دولية</p>
+                        <p class="small text-muted" id="ab-stat1">رحلة دولية</p>
                     </div>
                     <div class="col-6">
                         <h3 class="fw-bold mb-0">800+</h3>
-                        <p class="small text-muted">عميل سعيد</p>
+                        <p class="small text-muted" id="ab-stat2">عميل سعيد</p>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6" data-aos="fade-right">
+            <div class="col-lg-6" id="about-img-side" data-aos="fade-right">
                 <div class="position-relative">
                     <img src="flight01.jpg" class="img-fluid rounded-5 shadow-lg" alt="Travel">
                     <div class="position-absolute top-50 start-0 translate-middle d-none d-lg-block">
                         <div class="bg-white p-4 rounded-4 shadow-lg text-center" style="width: 150px;">
                             <h2 class="text-danger fw-900">20%</h2>
-                            <p class="mb-0 small fw-bold">خصم للحجز المبكر</p>
+                            <p class="mb-0 small fw-bold" id="ab-discount">خصم للحجز المبكر</p>
                         </div>
                     </div>
                 </div>
@@ -393,36 +418,36 @@
         <div class="booking-wrapper shadow-2xl">
             <div class="row g-0">
                 <div class="col-lg-5 p-5 d-flex flex-column justify-content-center" style="background: linear-gradient(45deg, #0a1118, #1a2a3a);">
-                    <h2 class="display-6 fw-bold mb-4">ابدأ رحلتك الآن</h2>
-                    <p class="opacity-75 mb-5">املأ البيانات وسيتواصل معك خبراء السفر لدينا خلال أقل من ساعة لتأكيد التفاصيل.</p>
+                    <h2 class="display-6 fw-bold mb-4" id="bk-title">ابدأ رحلتك الآن</h2>
+                    <p class="opacity-75 mb-5" id="bk-desc">ملأ البيانات وسيتواصل معك خبراء السفر لدينا خلال أقل من ساعة لتأكيد التفاصيل.</p>
                     <div class="d-flex align-items-center mb-4">
                         <div class="me-3 fs-2 text-gold"><i class="fab fa-whatsapp"></i></div>
                         <div>
-                            <h6 class="mb-0 fw-bold">دعم مباشر 24/7</h6>
-                            <p class="small opacity-50 mb-0">تواصل معنا عبر واتساب</p>
+                            <h6 class="mb-0 fw-bold" id="bk-support-t">دعم مباشر 24/7</h6>
+                            <p class="small opacity-50 mb-0" id="bk-support-d">تواصل معنا عبر واتساب</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-7 p-5 bg-white text-dark">
                     <div class="row g-4">
                         <div class="col-md-6">
-                            <label class="small fw-bold mb-2">الاسم بالكامل</label>
+                            <label class="small fw-bold mb-2" id="frm-name">الاسم بالكامل</label>
                             <input type="text" id="userName" class="form-control form-control-lg bg-light border-0" placeholder="محمد أحمد">
                         </div>
                         <div class="col-md-6">
-                            <label class="small fw-bold mb-2">رقم الهاتف</label>
+                            <label class="small fw-bold mb-2" id="frm-phone">رقم الهاتف</label>
                             <input type="text" id="userPhone" class="form-control form-control-lg bg-light border-0" placeholder="09xxxxxxx">
                         </div>
                         <div class="col-md-6">
-                            <label class="small fw-bold mb-2">الوجهة المقصودة</label>
+                            <label class="small fw-bold mb-2" id="frm-dest">الوجهة المقصودة</label>
                             <input type="text" id="userDest" class="form-control form-control-lg bg-light border-0" placeholder="إسطنبول، القاهرة...">
                         </div>
                         <div class="col-md-6">
-                            <label class="small fw-bold mb-2">تاريخ السفر</label>
+                            <label class="small fw-bold mb-2" id="frm-date">تاريخ السفر</label>
                             <input type="date" id="travelDate" class="form-control form-control-lg bg-light border-0">
                         </div>
                         <div class="col-12">
-                            <button onclick="sendToWhatsApp()" class="btn btn-luxury w-100 py-3 fs-5">
+                            <button onclick="sendToWhatsApp()" class="btn btn-luxury w-100 py-3 fs-5" id="btn-submit">
                                 <i class="fab fa-whatsapp me-2"></i> إرسال الطلب عبر واتساب
                             </button>
                         </div>
@@ -443,7 +468,7 @@
             <a href="#" class="text-white mx-2 fs-4 opacity-50 hover-opacity-100"><i class="fab fa-twitter"></i></a>
         </div>
         <hr class="opacity-10">
-        <p class="small opacity-50">جميع الحقوق محفوظة &copy; 2026 شركة الزبرجد للسفر والسياحة</p>
+        <p class="small opacity-50" id="footer-copy">جميع الحقوق محفوظة &copy; 2026 شركة الزبرجد للسفر والسياحة</p>
     </div>
 </footer>
 
@@ -454,19 +479,233 @@
     // Initialize AOS
     AOS.init({ duration: 1000, once: true });
 
-    // Updated Navbar Scroll Effect
+    // Navbar Scroll Effect
     window.addEventListener('scroll', function() {
         const nav = document.getElementById('mainNav');
         const logo = document.getElementById('navLogo');
         
         if (window.scrollY > 20) {
             nav.classList.add('scrolled');
-            logo.style.filter = 'none'; // يعود للونه الأصلي عند النزول
+            logo.style.filter = 'none'; 
         } else {
             nav.classList.remove('scrolled');
-            logo.style.filter = 'brightness(0) invert(1)'; // يظل أبيض ناصع في البداية
+            logo.style.filter = 'brightness(0) invert(1)'; 
         }
     });
+
+    // كائن الترجمة الذكي للتبديل بين العربية والإنجليزية فوراً بدون ريفريش
+    let currentLang = 'ar';
+    const translations = {
+        ar: {
+            dir: 'rtl',
+            bootstrap: 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css',
+            langBtn: 'English',
+            home: 'الرئيسية',
+            dest: 'الوجهات',
+            umrah: 'خدمات العمرة',
+            about: 'من نحن',
+            bookNav: 'احجز رحلتك',
+            heroTitle: 'اكتشف روعة العالم <br>مع <span class="hero-green-text">الزبرجد للخدمات السياحية</span>',
+            heroDesc: 'نحن لا نصنع رحلات فقط، نحن نصنع ذكريات تدوم للأبد',
+            lblDest: 'وجهة السفر',
+            pDest: 'إلى أين تريد الذهاب؟',
+            lblType: 'نوع الرحلة',
+            optOut: 'سياحة خارجية',
+            optUmrah: 'عمرة',
+            optBus: 'رحلات عمل',
+            lblDate: 'تاريخ السفر',
+            btnSearch: 'بحث',
+            srvHotels: 'فنادق',
+            srvFlights: 'طيران',
+            srvTrans: 'نقل',
+            srvVisas: 'تأشيرات',
+            srvUmrah: 'عمرة',
+            uBadge: 'خدمات إيمانية',
+            uTitle: 'رحلات العمرة',
+            uDesc: 'نعتني بك في رحلتك الروحانية بأقصى درجات التفاني',
+            uCard1T: 'تأشيرات العمرة',
+            uCard1D: 'إصدار تأشيرات العمرة الإلكترونية والزيارة بسرعة واحترافية عالية.',
+            uCard2T: 'فنادق مكة والمدينة',
+            uCard2D: 'حجوزات في أقرب الفنادق للحرمين الشريفين بأسعار تفضيلية.',
+            uCard3T: 'النقل والمواصلات',
+            uCard3D: 'أسطول من الحافلات والسيارات الحديثة لراحتكم أثناء التنقل.',
+            destTitle: 'وجهاتنا الشائعة',
+            destSubtitle: 'أماكن تم اختيارها بعناية من شركة الزبرجد',
+            destAll: 'شاهد الكل <i class="fas fa-arrow-left ms-2" id="dest-arrow"></i>',
+            city1: 'الإسكندرية', country1: 'مصر',
+            city2: 'القاهرة', country2: 'مصر',
+            city3: 'سيدي بو سعيد', country3: 'تونس',
+            abBadge: 'لماذا الزبرجد تور؟',
+            abTitle: 'أكثر من 30 سنة <br>التميز في خدمات السفر',
+            abDesc: 'شركة الزبرجد للخدمات السياحية هي شريككم الموثوق في ليبيا، نقدم حلولاً متكاملة تضمن لكم الراحة والأمان في كل وجهة تقصدونها.',
+            abStat1: 'رحلة دولية', abStat2: 'عميل سعيد',
+            abDiscount: 'خصم للحجز المبكر',
+            bkTitle: 'ابدأ رحلتك الآن',
+            bkDesc: 'املأ البيانات وسيتواصل معك خبراء السفر لدينا خلال أقل من ساعة لتأكيد التفاصيل.',
+            bkSupportT: 'دعم مباشر 24/7', bkSupportD: 'تواصل معنا عبر واتساب',
+            frmName: 'الاسم بالكامل', pName: 'محمد أحمد',
+            frmPhone: 'رقم الهاتف', pPhone: '09xxxxxxx',
+            frmDest: 'الوجهة المقصودة', pDestForm: 'إسطنبول، القاهرة...',
+            btnSubmit: '<i class="fab fa-whatsapp me-2"></i> إرسال الطلب عبر واتساب',
+            footerCopy: 'جميع الحقوق محفوظة &copy; 2026 شركة الزبرجد للسفر والسياحة',
+            alertMsg: 'يرجى إكمال البيانات الأساسية',
+            waTitle: '*طلب حجز VIP من الموقع*'
+        },
+        en: {
+            dir: 'ltr',
+            bootstrap: 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css',
+            langBtn: 'العربية',
+            home: 'Home',
+            dest: 'Destinations',
+            umrah: 'Umrah Services',
+            about: 'About Us',
+            bookNav: 'Book Your Trip',
+            heroTitle: 'Discover the World <br>with <span class="hero-green-text">Zabarjad Travel Services</span>',
+            heroDesc: 'We don’t just create trips, we create memories that last forever',
+            lblDest: 'Travel Destination',
+            pDest: 'Where do you want to go?',
+            lblType: 'Trip Type',
+            optOut: 'International Tourism',
+            optUmrah: 'Umrah',
+            optBus: 'Business Trips',
+            lblDate: 'Travel Date',
+            btnSearch: 'Search',
+            srvHotels: 'Hotels',
+            srvFlights: 'Flights',
+            srvTrans: 'Transport',
+            srvVisas: 'Visas',
+            srvUmrah: 'Umrah',
+            uBadge: 'Spiritual Services',
+            uTitle: 'Umrah Trips',
+            uDesc: 'We take care of you in your spiritual journey with the utmost dedication',
+            uCard1T: 'Umrah Visas',
+            uCard1D: 'Issuance of electronic Umrah and visit visas with speed and high professionalism.',
+            uCard2T: 'Makkah & Madinah Hotels',
+            uCard2D: 'Bookings in the closest hotels to the Two Holy Mosques at preferential prices.',
+            uCard3T: 'Transportation',
+            uCard3D: 'A fleet of modern buses and cars for your comfort during travel.',
+            destTitle: 'Popular Destinations',
+            destSubtitle: 'Carefully selected places by Zabarjad Company',
+            destAll: 'View All <i class="fas fa-arrow-right ms-2" id="dest-arrow"></i>',
+            city1: 'Alexandria', country1: 'Egypt',
+            city2: 'Cairo', country2: 'Egypt',
+            city3: 'Sidi Bou Said', country3: 'Tunisia',
+            abBadge: 'Why Zabarjad Tour?',
+            abTitle: 'Over 30 Years <br>of Excellence in Travel',
+            abDesc: 'Zabarjad Tourism Services is your trusted partner in Libya. We offer integrated solutions that guarantee your comfort and safety in every destination.',
+            abStat1: 'International Trips', abStat2: 'Happy Clients',
+            abDiscount: 'Early Bird Discount',
+            bkTitle: 'Start Your Journey Now',
+            bkDesc: 'Fill in the data and our travel experts will contact you within less than an hour to confirm details.',
+            bkSupportT: 'Live Support 24/7', bkSupportD: 'Connect via WhatsApp',
+            frmName: 'Full Name', pName: 'John Doe',
+            frmPhone: 'Phone Number', pPhone: '09xxxxxxx',
+            frmDest: 'Destination', pDestForm: 'Istanbul, Cairo...',
+            btnSubmit: '<i class="fab fa-whatsapp me-2"></i> Send Request via WhatsApp',
+            footerCopy: 'All rights reserved &copy; 2026 Zabarjad Travel & Tourism Company',
+            alertMsg: 'Please complete the basic information',
+            waTitle: '*VIP Booking Request from Website*'
+        }
+    };
+
+    function toggleLanguage() {
+        currentLang = currentLang === 'ar' ? 'en' : 'ar';
+        const langData = translations[currentLang];
+        
+        // تغيير اتجاه الصفحة وملف البوتستراب للمحاذاة الصحيحة
+        document.getElementById('htmlPage').setAttribute('lang', currentLang);
+        document.getElementById('htmlPage').setAttribute('dir', langData.dir);
+        document.getElementById('bootstrapStyles').setAttribute('href', langData.bootstrap);
+        
+        // تبديل فئات الأيمنتس لـ Navbar اتجاه اليمين واليسار
+        const navLinks = document.getElementById('navLinks');
+        if (currentLang === 'en') {
+            navLinks.classList.remove('ms-auto');
+            navLinks.classList.add('me-auto');
+            
+            // تعديل اتجاهات انيميشن AOS لتناسب الانجليزية
+            document.getElementById('about-text-side').setAttribute('data-aos', 'fade-right');
+            document.getElementById('about-img-side').setAttribute('data-aos', 'fade-left');
+            document.getElementById('dest-header').setAttribute('data-aos', 'fade-left');
+        } else {
+            navLinks.classList.remove('me-auto');
+            navLinks.classList.add('ms-auto');
+            
+            document.getElementById('about-text-side').setAttribute('data-aos', 'fade-left');
+            document.getElementById('about-img-side').setAttribute('data-aos', 'fade-right');
+            document.getElementById('dest-header').setAttribute('data-aos', 'fade-right');
+        }
+
+        // تحديث النصوص في كل الصفحة
+        document.getElementById('langSwitcher').innerText = langData.langBtn;
+        document.getElementById('lnk-home').innerText = langData.home;
+        document.getElementById('lnk-dest').innerText = langData.dest;
+        document.getElementById('lnk-umrah').innerText = langData.umrah;
+        document.getElementById('lnk-about').innerText = langData.about;
+        document.getElementById('btn-book-nav').innerText = langData.bookNav;
+        
+        document.getElementById('hero-title').innerHTML = langData.heroTitle;
+        document.getElementById('hero-desc').innerText = langData.heroDesc;
+        
+        document.getElementById('lbl-dest').innerText = langData.lblDest;
+        document.getElementById('p-dest').placeholder = langData.pDest;
+        document.getElementById('lbl-type').innerText = langData.lblType;
+        document.getElementById('opt-out').innerText = langData.optOut;
+        document.getElementById('opt-umrah').innerText = langData.optUmrah;
+        document.getElementById('opt-bus').innerText = langData.optBus;
+        document.getElementById('lbl-date').innerText = langData.lblDate;
+        document.getElementById('btn-search').innerText = langData.btnSearch;
+        
+        document.getElementById('srv-hotels').innerText = langData.srvHotels;
+        document.getElementById('srv-flights').innerText = langData.srvFlights;
+        document.getElementById('srv-trans').innerText = langData.srvTrans;
+        document.getElementById('srv-visas').innerText = langData.srvVisas;
+        document.getElementById('srv-umrah').innerText = langData.srvUmrah;
+        
+        document.getElementById('u-badge').innerText = langData.uBadge;
+        document.getElementById('u-title').innerText = langData.uTitle;
+        document.getElementById('u-desc').innerText = langData.uDesc;
+        document.getElementById('u-card1-t').innerText = langData.uCard1T;
+        document.getElementById('u-card1-d').innerText = langData.uCard1D;
+        document.getElementById('u-card2-t').innerText = langData.uCard2T;
+        document.getElementById('u-card2-d').innerText = langData.uCard2D;
+        document.getElementById('u-card3-t').innerText = langData.uCard3T;
+        document.getElementById('u-card3-d').innerText = langData.uCard3D;
+        
+        document.getElementById('dest-title').innerText = langData.destTitle;
+        document.getElementById('dest-subtitle').innerText = langData.destSubtitle;
+        document.getElementById('dest-all').innerHTML = langData.destAll;
+        
+        document.getElementById('card-city1').innerText = langData.city1;
+        document.getElementById('card-country1').innerText = langData.country1;
+        document.getElementById('card-city2').innerText = langData.city2;
+        document.getElementById('card-country2').innerText = langData.country2;
+        document.getElementById('card-city3').innerText = langData.city3;
+        document.getElementById('card-country3').innerText = langData.country3;
+        
+        document.getElementById('ab-badge').innerText = langData.abBadge;
+        document.getElementById('ab-title').innerHTML = langData.abTitle;
+        document.getElementById('ab-desc').innerText = langData.abDesc;
+        document.getElementById('ab-stat1').innerText = langData.abStat1;
+        document.getElementById('ab-stat2').innerText = langData.abStat2;
+        document.getElementById('ab-discount').innerText = langData.abDiscount;
+        
+        document.getElementById('bk-title').innerText = langData.bkTitle;
+        document.getElementById('bk-desc').innerText = langData.bkDesc;
+        document.getElementById('bk-support-t').innerText = langData.bkSupportT;
+        document.getElementById('bk-support-d').innerText = langData.bkSupportD;
+        
+        document.getElementById('frm-name').innerText = langData.frmName;
+        document.getElementById('userName').placeholder = langData.pName;
+        document.getElementById('frm-phone').innerText = langData.frmPhone;
+        document.getElementById('userPhone').placeholder = langData.pPhone;
+        document.getElementById('frm-dest').innerText = langData.frmDest;
+        document.getElementById('userDest').placeholder = langData.pDestForm;
+        document.getElementById('frm-date').innerText = langData.frmDate;
+        document.getElementById('btn-submit').innerHTML = langData.btnSubmit;
+        
+        document.getElementById('footer-copy').innerHTML = langData.footerCopy;
+    }
 
     function sendToWhatsApp() {
         const myNumber = "218912181349";
@@ -474,17 +713,24 @@
         const phone = document.getElementById('userPhone').value;
         const dest = document.getElementById('userDest').value;
         const date = document.getElementById('travelDate').value;
+        const langData = translations[currentLang];
 
         if(!name || !phone || !dest) {
-            alert("يرجى إكمال البيانات الأساسية");
+            alert(langData.alertMsg);
             return;
         }
 
-        const message = `*طلب حجز VIP من الموقع*%0A%0A` +
-                        `👤 *العميل:* ${name}%0A` +
-                        `📞 *الهاتف:* ${phone}%0A` +
-                        `🌍 *الوجهة:* ${dest}%0A` +
-                        `📅 *التاريخ:* ${date}`;
+        // تجهيز نصوص رسالة واتساب بناءً على اللغة الحالية المحددة للموقع
+        const clientLbl = currentLang === 'ar' ? 'العميل' : 'Client';
+        const phoneLbl = currentLang === 'ar' ? 'الهاتف' : 'Phone';
+        const destLbl = currentLang === 'ar' ? 'الوجهة' : 'Destination';
+        const dateLbl = currentLang === 'ar' ? 'التاريخ' : 'Date';
+
+        const message = `${langData.waTitle}%0A%0A` +
+                        `👤 *${clientLbl}:* ${name}%0A` +
+                        `📞 *${phoneLbl}:* ${phone}%0A` +
+                        `🌍 *${destLbl}:* ${dest}%0A` +
+                        `📅 *${dateLbl}:* ${date}`;
         
         window.open(`https://wa.me/${myNumber}?text=${message}`, '_blank');
     }
