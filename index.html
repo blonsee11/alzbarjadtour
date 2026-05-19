@@ -27,7 +27,7 @@
             overflow-x: hidden;
         }
 
-        /* Navbar Updated for Icon Visibility */
+        /* Navbar */
         .navbar {
             padding: 20px 0;
             transition: all 0.4s ease-in-out;
@@ -63,11 +63,21 @@
         }
         .nav-link:hover::after { width: 100%; }
 
-        /* تكبير اللوجو حسب طلبك */
+        /* تعديل الشعار ليظل ثابتاً، واضحاً وكبيراً دائماً */
         #navLogo {
-            transition: all 0.4s ease;
+            height: 65px !important; /* الحجم الكبير والواضح */
+            display: inline-block;
+            vertical-align: middle;
+            transition: transform 0.3s ease;
+        }
+        
+        /* إذا كان الشعار الأصلي يحتاج إلى فلتر ليظهر باللون الأبيض الناصع فوق الهيرو الداكن وفي الثيم الأبيض */
+        .navbar #navLogo {
             filter: brightness(0) invert(1);
-            height: 65px !important; /* تعديل حجم الشعار */
+        }
+        /* عند نزول الصفحة، إذا أردت أن يتحول الشعار للون الداكن ليناسب الخلفية البيضاء، اترك الكود التالي كما هو، أو احذفه ليظل أبيض بالكامل */
+        .navbar.scrolled #navLogo {
+            filter: none; /* يعود للونه الأصلي، أو يمكنك استبداله بـ filter: brightness(0) للأسود بالكامل */
         }
 
         /* Hero Section */
@@ -204,14 +214,14 @@
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg fixed-top" id="mainNav">
     <div class="container">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand d-flex align-items-center" href="#">
+            <!-- الشعار الآن محمي بالـ CSS لضمان عدم اختفائه نهائياً وثبات أبعاده -->
             <img src="logo.png" alt="Zabarjad" id="navLogo">
         </a>
         <button class="navbar-toggler bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-            <!-- التبديل التلقائي لـ ms-auto و me-auto يعتمد على الكود البرمجي للغة -->
             <ul class="navbar-nav ms-auto align-items-center" id="navLinks">
                 <li class="nav-item"><a href="#" class="nav-link" id="lnk-home">الرئيسية</a></li>
                 <li class="nav-item"><a href="#popular" class="nav-link" id="lnk-dest">الوجهات</a></li>
@@ -384,7 +394,7 @@
         <div class="row align-items-center g-5">
             <div class="col-lg-6" id="about-text-side" data-aos="fade-left">
                 <h6 class="text-uppercase fw-bold" style="color: var(--primary-gold); letter-spacing: 2px;" id="ab-badge">لماذا الزبرجد تور؟</h6>
-                <h2 class="display-5 fw-900 mb-4" id="ab-title">أكثر من 30 سنة  <br>التميز في خدمات السفر</h2>
+                <h2 class="display-5 fw-900 mb-4" id="ab-title">أكثر من 30 سنة <br>التميز في خدمات السفر</h2>
                 <p class="text-muted mb-4 lead" id="ab-desc">شركة الزبرجد للخدمات السياحية هي شريككم الموثوق في ليبيا، نقدم حلولاً متكاملة تضمن لكم الراحة والأمان في كل وجهة تقصدونها.</p>
                 <div class="row g-4">
                     <div class="col-6">
@@ -419,7 +429,7 @@
             <div class="row g-0">
                 <div class="col-lg-5 p-5 d-flex flex-column justify-content-center" style="background: linear-gradient(45deg, #0a1118, #1a2a3a);">
                     <h2 class="display-6 fw-bold mb-4" id="bk-title">ابدأ رحلتك الآن</h2>
-                    <p class="opacity-75 mb-5" id="bk-desc">ملأ البيانات وسيتواصل معك خبراء السفر لدينا خلال أقل من ساعة لتأكيد التفاصيل.</p>
+                    <p class="opacity-75 mb-5" id="bk-desc">املأ البيانات وسيتواصل معك خبراء السفر لدينا خلال أقل من ساعة لتأكيد التفاصيل.</p>
                     <div class="d-flex align-items-center mb-4">
                         <div class="me-3 fs-2 text-gold"><i class="fab fa-whatsapp"></i></div>
                         <div>
@@ -479,17 +489,14 @@
     // Initialize AOS
     AOS.init({ duration: 1000, once: true });
 
-    // Navbar Scroll Effect
+    // شريط التنقل وتأثير السكرول بدون لمس اللوجو لضمان ثباته
     window.addEventListener('scroll', function() {
         const nav = document.getElementById('mainNav');
-        const logo = document.getElementById('navLogo');
         
         if (window.scrollY > 20) {
             nav.classList.add('scrolled');
-            logo.style.filter = 'none'; 
         } else {
             nav.classList.remove('scrolled');
-            logo.style.filter = 'brightness(0) invert(1)'; 
         }
     });
 
@@ -612,18 +619,15 @@
         currentLang = currentLang === 'ar' ? 'en' : 'ar';
         const langData = translations[currentLang];
         
-        // تغيير اتجاه الصفحة وملف البوتستراب للمحاذاة الصحيحة
         document.getElementById('htmlPage').setAttribute('lang', currentLang);
         document.getElementById('htmlPage').setAttribute('dir', langData.dir);
         document.getElementById('bootstrapStyles').setAttribute('href', langData.bootstrap);
         
-        // تبديل فئات الأيمنتس لـ Navbar اتجاه اليمين واليسار
         const navLinks = document.getElementById('navLinks');
         if (currentLang === 'en') {
             navLinks.classList.remove('ms-auto');
             navLinks.classList.add('me-auto');
             
-            // تعديل اتجاهات انيميشن AOS لتناسب الانجليزية
             document.getElementById('about-text-side').setAttribute('data-aos', 'fade-right');
             document.getElementById('about-img-side').setAttribute('data-aos', 'fade-left');
             document.getElementById('dest-header').setAttribute('data-aos', 'fade-left');
@@ -636,7 +640,6 @@
             document.getElementById('dest-header').setAttribute('data-aos', 'fade-right');
         }
 
-        // تحديث النصوص في كل الصفحة
         document.getElementById('langSwitcher').innerText = langData.langBtn;
         document.getElementById('lnk-home').innerText = langData.home;
         document.getElementById('lnk-dest').innerText = langData.dest;
@@ -720,7 +723,6 @@
             return;
         }
 
-        // تجهيز نصوص رسالة واتساب بناءً على اللغة الحالية المحددة للموقع
         const clientLbl = currentLang === 'ar' ? 'العميل' : 'Client';
         const phoneLbl = currentLang === 'ar' ? 'الهاتف' : 'Phone';
         const destLbl = currentLang === 'ar' ? 'الوجهة' : 'Destination';
