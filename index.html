@@ -214,11 +214,11 @@
                 <li class="nav-item"><a href="#popular" class="nav-link" id="lnk-dest">الوجهات</a></li>
                 <li class="nav-item"><a href="#umrah" class="nav-link" id="lnk-umrah">خدمات العمرة</a></li>
                 <li class="nav-item"><a href="#about" class="nav-link" id="lnk-about">من نحن</a></li>
-                <li class="nav-item id="btnWrapper" class="ms-lg-3 me-lg-0">
+                <li class="nav-item" id="btnWrapper">
                     <a href="#booking-target" class="btn btn-luxury" id="btn-book-nav">احجز رحلتك</a>
                 </li>
                 <li class="nav-item" id="langWrapper">
-                    <button class="btn btn-lang ms-lg-2" onclick="toggleLanguage()" id="langSwitcher">English</button>
+                    <button class="btn btn-lang" onclick="toggleLanguage()" id="langSwitcher">English</button>
                 </li>
             </ul>
         </div>
@@ -452,4 +452,278 @@
         <img src="logo.png" alt="Zabarjad" style="height: 40px; margin-bottom: 30px; filter: brightness(0) invert(1);">
         <div class="mb-4">
             <a href="#" class="text-white mx-2 fs-4 opacity-50 hover-opacity-100"><i class="fab fa-facebook"></i></a>
-            <a href="#" class="text-white mx-2 fs-4 opacity-50 hover-opacity-100"><i class="fab fa-instagram">
+            <a href="#" class="text-white mx-2 fs-4 opacity-50 hover-opacity-100"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="text-white mx-2 fs-4 opacity-50 hover-opacity-100"><i class="fab fa-twitter"></i></a>
+        </div>
+        <hr class="opacity-10">
+        <p class="small opacity-50" id="footer-copy">جميع الحقوق محفوظة &copy; 2026 شركة الزبرجد للسفر والسياحة</p>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+    // Initialize AOS
+    AOS.init({ duration: 1000, once: true });
+
+    // تأثير السكرول للشريط الأبيض الثابت
+    window.addEventListener('scroll', function() {
+        const nav = document.getElementById('mainNav');
+        if (window.scrollY > 20) {
+            nav.classList.add('scrolled');
+        } else {
+            nav.classList.remove('scrolled');
+        }
+    });
+
+    let currentLang = 'ar';
+    const translations = {
+        ar: {
+            dir: 'rtl',
+            bootstrap: 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css',
+            langBtn: 'English',
+            home: 'الرئيسية',
+            dest: 'الوجهات',
+            umrah: 'خدمات العمرة',
+            about: 'من نحن',
+            bookNav: 'احجز رحلتك',
+            heroTitle: 'اكتشف روعة العالم <br>مع <span class="hero-green-text">الزبرجد للخدمات السياحية</span>',
+            heroDesc: 'نحن لا نصنع رحلات فقط، نحن نصنع ذكريات تدوم للأبد',
+            lblDest: 'وجهة السفر',
+            pDest: 'إلى أين تريد الذهاب؟',
+            lblType: 'نوع الرحلة',
+            optOut: 'سياحة خارجية',
+            optUmrah: 'عمرة',
+            optBus: 'رحلات عمل',
+            lblDate: 'تاريخ السفر',
+            btnSearch: 'بحث',
+            srvHotels: 'فنادق',
+            srvFlights: 'طيران',
+            srvTrans: 'نقل',
+            srvVisas: 'تأشيرات',
+            srvUmrah: 'عمرة',
+            uBadge: 'خدمات إيمانية',
+            uTitle: 'رحلات العمرة',
+            uDesc: 'نعتني بك في رحلتك الروحانية بأقصى درجات التفاني',
+            uCard1T: 'تأشيرات العمرة',
+            uCard1D: 'إصدار تأشيرات العمرة الإلكترونية والزيارة بسرعة واحترافية عالية.',
+            uCard2T: 'فنادق مكة والمدينة',
+            uCard2D: 'حجوزات في أقرب الفنادق للحرمين الشريفين بأسعار تفضيلية.',
+            uCard3T: 'النقل والمواصلات',
+            uCard3D: 'أسطول من الحافلات والسيارات الحديثة لراحتكم أثناء التنقل.',
+            destTitle: 'وجهاتنا الشائعة',
+            destSubtitle: 'أماكن تم اختيارها بعناية من شركة الزبرجد',
+            destAll: 'شاهد الكل <i class="fas fa-arrow-left ms-2" id="dest-arrow"></i>',
+            city1: 'الإسكندرية', country1: 'مصر',
+            city2: 'القاهرة', country2: 'مصر',
+            city3: 'سيدي بو سعيد', country3: 'تونس',
+            abBadge: 'لماذا الزبرجد تور؟',
+            abTitle: 'أكثر من 30 سنة <br>التميز في خدمات السفر',
+            abDesc: 'شركة الزبرجد للخدمات السياحية هي شريككم الموثوق في ليبيا، نقدم حلولاً متكاملة تضمن لكم الراحة والأمان في كل وجهة تقصدونها.',
+            abStat1: 'رحلة دولية', abStat2: 'عميل سعيد',
+            abDiscount: 'خصم للحجز المبكر',
+            bkTitle: 'ابدأ رحلتك الآن',
+            bkDesc: 'املأ البيانات وسيتواصل معك خبراء السفر لدينا خلال أقل من ساعة لتأكيد التفاصيل.',
+            bkSupportT: 'دعم مباشر 24/7', bkSupportD: 'تواصل معنا عبر واتساب',
+            frmName: 'الاسم بالكامل', pName: 'محمد أحمد',
+            frmPhone: 'رقم الهاتف', pPhone: '09xxxxxxx',
+            frmDest: 'الوجهة المقصودة', pDestForm: 'إسطنبول، القاهرة...',
+            btnSubmit: '<i class="fab fa-whatsapp me-2"></i> إرسال الطلب عبر واتساب',
+            footerCopy: 'جميع الحقوق محفوظة &copy; 2026 شركة الزبرجد للسفر والسياحة',
+            alertMsg: 'يرجى إكمال البيانات الأساسية',
+            waTitle: '*طلب حجز VIP من الموقع*'
+        },
+        en: {
+            dir: 'ltr',
+            bootstrap: 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css',
+            langBtn: 'العربية',
+            home: 'Home',
+            dest: 'Destinations',
+            umrah: 'Umrah Services',
+            about: 'About Us',
+            bookNav: 'Book Your Trip',
+            heroTitle: 'Discover the World <br>with <span class="hero-green-text">Zabarjad Tourism Services</span>',
+            heroDesc: 'We don’t just create trips, we create memories that last forever',
+            lblDest: 'Travel Destination',
+            pDest: 'Where do you want to go?',
+            lblType: 'Trip Type',
+            optOut: 'International Tourism',
+            optUmrah: 'Umrah',
+            optBus: 'Business Trips',
+            lblDate: 'Travel Date',
+            btnSearch: 'Search',
+            srvHotels: 'Hotels',
+            srvFlights: 'Flights',
+            srvTrans: 'Transport',
+            srvVisas: 'Visas',
+            srvUmrah: 'Umrah',
+            uBadge: 'Spiritual Services',
+            uTitle: 'Umrah Trips',
+            uDesc: 'We take care of you in your spiritual journey with the utmost dedication',
+            uCard1T: 'Umrah Visas',
+            uCard1D: 'Issuance of electronic Umrah and visit visas with speed and high professionalism.',
+            uCard2T: 'Makkah & Madinah Hotels',
+            uCard2D: 'Bookings in the closest hotels to the Two Holy Mosques at preferential prices.',
+            uCard3T: 'Transportation',
+            uCard3D: 'A fleet of modern buses and cars for your comfort during travel.',
+            destTitle: 'Popular Destinations',
+            destSubtitle: 'Carefully selected places by Zabarjad Company',
+            destAll: 'View All <i class="fas fa-arrow-right ms-2" id="dest-arrow"></i>',
+            city1: 'Alexandria', country1: 'Egypt',
+            city2: 'Cairo', country2: 'Egypt',
+            city3: 'Sidi Bou Said', country3: 'Tunisia',
+            abBadge: 'Why Zabarjad Tour?',
+            abTitle: 'Over 30 Years <br>of Excellence in Tourism',
+            abDesc: 'Zabarjad Tourism Services is your trusted partner in Libya. We offer integrated solutions that guarantee your comfort and safety in every destination.',
+            abStat1: 'International Trips', abStat2: 'Happy Clients',
+            abDiscount: 'Early Bird Discount',
+            bkTitle: 'Start Your Journey Now',
+            bkDesc: 'Fill in the data and our travel experts will contact you within less than an hour to confirm details.',
+            bkSupportT: 'Live Support 24/7', bkSupportD: 'Connect via WhatsApp',
+            frmName: 'Full Name', pName: 'John Doe',
+            frmPhone: 'Phone Number', pPhone: '09xxxxxxx',
+            frmDest: 'Destination', pDestForm: 'Istanbul, Cairo...',
+            btnSubmit: '<i class="fab fa-whatsapp me-2"></i> Send Request via WhatsApp',
+            footerCopy: 'All rights reserved &copy; 2026 Zabarjad Travel & Tourism Company',
+            alertMsg: 'Please complete the basic information',
+            waTitle: '*VIP Booking Request from Website*'
+        }
+    };
+
+    function toggleLanguage() {
+        currentLang = currentLang === 'ar' ? 'en' : 'ar';
+        const langData = translations[currentLang];
+        
+        document.getElementById('htmlPage').setAttribute('lang', currentLang);
+        document.getElementById('htmlPage').setAttribute('dir', langData.dir);
+        document.getElementById('bootstrapStyles').setAttribute('href', langData.bootstrap);
+        
+        const navLinks = document.getElementById('navLinks');
+        const btnBookNav = document.getElementById('btn-book-nav');
+        const langSwitcher = document.getElementById('langSwitcher');
+
+        if (currentLang === 'en') {
+            // المحاذاة في الإنجليزية: تحويل قائمة الروابط وعكسها تماماً لتصبح في جهة اليمين (me-auto) وينفصل اللوجو يساراً
+            navLinks.classList.remove('ms-auto');
+            navLinks.classList.add('me-auto');
+            
+            // ضبط الهوامش الداخلية للعناصر لتناسب القراءة الأجنبية LTR
+            document.getElementById('btnWrapper').className = "nav-item me-lg-3 ms-lg-0";
+            document.getElementById('langWrapper').className = "nav-item me-lg-2 ms-lg-0";
+
+            document.getElementById('about-text-side').setAttribute('data-aos', 'fade-right');
+            document.getElementById('about-img-side').setAttribute('data-aos', 'fade-left');
+            document.getElementById('dest-header').setAttribute('data-aos', 'fade-left');
+        } else {
+            // العودة للمحاذاة العربية الطبيعية: القائمة يسار (ms-auto) والشعار يمين
+            navLinks.classList.remove('me-auto');
+            navLinks.classList.add('ms-auto');
+            
+            document.getElementById('btnWrapper').className = "nav-item ms-lg-3 me-lg-0";
+            document.getElementById('langWrapper').className = "nav-item ms-lg-2 me-lg-0";
+
+            document.getElementById('about-text-side').setAttribute('data-aos', 'fade-left');
+            document.getElementById('about-img-side').setAttribute('data-aos', 'fade-right');
+            document.getElementById('dest-header').setAttribute('data-aos', 'fade-right');
+        }
+
+        // تحديث النصوص والترجمات
+        document.getElementById('langSwitcher').innerText = langData.langBtn;
+        document.getElementById('lnk-home').innerText = langData.home;
+        document.getElementById('lnk-dest').innerText = langData.dest;
+        document.getElementById('lnk-umrah').innerText = langData.umrah;
+        document.getElementById('lnk-about').innerText = langData.about;
+        document.getElementById('btn-book-nav').innerText = langData.bookNav;
+        
+        document.getElementById('hero-title').innerHTML = langData.heroTitle;
+        document.getElementById('hero-desc').innerText = langData.heroDesc;
+        
+        document.getElementById('lbl-dest').innerText = langData.lblDest;
+        document.getElementById('p-dest').placeholder = langData.pDest;
+        document.getElementById('lbl-type').innerText = langData.lblType;
+        document.getElementById('opt-out').innerText = langData.optOut;
+        document.getElementById('opt-umrah').innerText = langData.optUmrah;
+        document.getElementById('opt-bus').innerText = langData.optBus;
+        document.getElementById('lbl-date').innerText = langData.lblDate;
+        document.getElementById('btn-search').innerText = langData.btnSearch;
+        
+        document.getElementById('srv-hotels').innerText = langData.srvHotels;
+        document.getElementById('srv-flights').innerText = langData.srvFlights;
+        document.getElementById('srv-trans').innerText = langData.srvTrans;
+        document.getElementById('srv-visas').innerText = langData.srvVisas;
+        document.getElementById('srv-umrah').innerText = langData.srvUmrah;
+        
+        document.getElementById('u-badge').innerText = langData.uBadge;
+        document.getElementById('u-title').innerText = langData.uTitle;
+        document.getElementById('u-desc').innerText = langData.uDesc;
+        document.getElementById('u-card1-t').innerText = langData.uCard1T;
+        document.getElementById('u-card1-d').innerText = langData.uCard1D;
+        document.getElementById('u-card2-t').innerText = langData.uCard2T;
+        document.getElementById('u-card2-d').innerText = langData.uCard2D;
+        document.getElementById('u-card3-t').innerText = langData.uCard3T;
+        document.getElementById('u-card3-d').innerText = langData.uCard3D;
+        
+        document.getElementById('dest-title').innerText = langData.destTitle;
+        document.getElementById('dest-subtitle').innerText = langData.destSubtitle;
+        document.getElementById('dest-all').innerHTML = langData.destAll;
+        
+        document.getElementById('card-city1').innerText = langData.city1;
+        document.getElementById('card-country1').innerText = langData.country1;
+        document.getElementById('card-city2').innerText = langData.city2;
+        document.getElementById('card-country2').innerText = langData.country2;
+        document.getElementById('card-city3').innerText = langData.city3;
+        document.getElementById('card-country3').innerText = langData.country3;
+        
+        document.getElementById('ab-badge').innerText = langData.abBadge;
+        document.getElementById('ab-title').innerHTML = langData.abTitle;
+        document.getElementById('ab-desc').innerText = langData.abDesc;
+        document.getElementById('ab-stat1').innerText = langData.abStat1;
+        document.getElementById('ab-stat2').innerText = langData.abStat2;
+        document.getElementById('ab-discount').innerText = langData.abDiscount;
+        
+        document.getElementById('bk-title').innerText = langData.bkTitle;
+        document.getElementById('bk-desc').innerText = langData.bkDesc;
+        document.getElementById('bk-support-t').innerText = langData.bkSupportT;
+        document.getElementById('bk-support-d').innerText = langData.bkSupportD;
+        
+        document.getElementById('frm-name').innerText = langData.frmName;
+        document.getElementById('userName').placeholder = langData.pName;
+        document.getElementById('frm-phone').innerText = langData.frmPhone;
+        document.getElementById('userPhone').placeholder = langData.pPhone;
+        document.getElementById('frm-dest').innerText = langData.frmDest;
+        document.getElementById('userDest').placeholder = langData.pDestForm;
+        document.getElementById('frm-date').innerText = langData.frmDate;
+        document.getElementById('btn-submit').innerHTML = langData.btnSubmit;
+        
+        document.getElementById('footer-copy').innerHTML = langData.footerCopy;
+    }
+
+    function sendToWhatsApp() {
+        const myNumber = "218912181349";
+        const name = document.getElementById('userName').value;
+        const phone = document.getElementById('userPhone').value;
+        const dest = document.getElementById('userDest').value;
+        const date = document.getElementById('travelDate').value;
+        const langData = translations[currentLang];
+
+        if(!name || !phone || !dest) {
+            alert(langData.alertMsg);
+            return;
+        }
+
+        const clientLbl = currentLang === 'ar' ? 'العميل' : 'Client';
+        const phoneLbl = currentLang === 'ar' ? 'الهاتف' : 'Phone';
+        const destLbl = currentLang === 'ar' ? 'الوجهة' : 'Destination';
+        const dateLbl = currentLang === 'ar' ? 'التاريخ' : 'Date';
+
+        const message = `${langData.waTitle}%0A%0A` +
+                        `👤 *${clientLbl}:* ${name}%0A` +
+                        `📞 *${phoneLbl}:* ${phone}%0A` +
+                        `🌍 *${destLbl}:* ${dest}%0A` +
+                        `📅 *${dateLbl}:* ${date}`;
+        
+        window.open(`https://wa.me/${myNumber}?text=${message}`, '_blank');
+    }
+</script>
+</body>
+</html>
